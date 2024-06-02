@@ -18,12 +18,17 @@ export default function Mainpage() {
         MAQE Forum
       </Typography>
       <Typography variant="h6" mt="3%">
-        Your current timezone is: Asia/Bangkok
+        Your current timezone is:{" "}
+        {Intl.DateTimeFormat().resolvedOptions().timeZone}
       </Typography>
       <Grid container direction="column" gap="1em" mt="1em">
-        {postLists?.map((item, i) => {
+        {posts?.map((item, i) => {
           return (
-            <Cards data={item} key={`card#${i}`} evenBgColor={i % 2 != 0} />
+            <Cards
+              data={item}
+              key={`card#${item.id}`}
+              evenBgColor={i % 2 != 0}
+            />
           );
         })}
       </Grid>
