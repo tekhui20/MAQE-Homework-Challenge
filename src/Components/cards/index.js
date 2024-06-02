@@ -16,7 +16,7 @@ export default function Cards(props) {
   const { data, evenBgColor } = props;
 
   const FindAuthor = () => {
-    return authors?.find((a) => a.id === data.author_id);
+    return authors?.find((a) => a.id === data?.author_id);
   };
 
   return (
@@ -30,7 +30,7 @@ export default function Cards(props) {
       >
         <Avatar src={FindAuthor()?.avatar_url} />
         <Typography ml="0.7em" color="#f46e45" fontWeight={600}>
-          {FindAuthor().name}
+          {FindAuthor()?.name}
         </Typography>
         <Typography ml="0.5em" color="gray">
           posted on{" "}
@@ -59,11 +59,11 @@ export default function Cards(props) {
         <Grid container ml="1em" direction="column">
           <Grid item>
             <Typography variant="h5" fontWeight={600} sx={{}}>
-              {data.title}
+              {data?.title}
             </Typography>
           </Grid>
           <Grid item>
-            <Typography>{data.body}</Typography>
+            <Typography>{data?.body}</Typography>
           </Grid>
         </Grid>
       </CardContent>
