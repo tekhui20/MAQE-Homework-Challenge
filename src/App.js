@@ -1,24 +1,40 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { actionChangePosts } from "./store/reducers/posts";
+import { api } from "./utils/api";
+import { actionChangeUsers } from "./store/reducers/users";
+import { Grid } from "@mui/material";
+import Mainpage from "./Components/mainpage";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const getPosts = async () => {
+    const posts = await api.get("https://maqe.github.io/json/posts.json");
+    dispatch(actionChangePosts(posts.data));
+  };
+
+  const getAuthors = async () => {
+    const authors = await api.get("https://maqe.github.io/json/authors.json");
+    dispatch(actionChangeUsers(authors.data));
+  };
+
+  useEffect(() => {
+    getPosts();
+    getAuthors();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Test Git 1
-        </a>
-      </header>
-    </div>
+    <Grid
+      container
+      width="100%"
+      height="100%"
+      justifyContent="center"
+      sx={{ backgroundColor: "#eeeeee" }}
+    >
+      <Mainpage />
+    </Grid>
   );
 }
 
